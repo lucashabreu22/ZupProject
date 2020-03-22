@@ -1,9 +1,6 @@
 package Page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Maps.HomePageMap;
 import junit.framework.Assert;
@@ -26,6 +23,7 @@ public class HomePagePage extends BasePage{
 	   */
 	public void buscarProduto(String nomeProduto) {
 		if(homepageMap.campoBuscar().isDisplayed()) {
+			System.out.println("Bucando produto "+nomeProduto+"");
 			homepageMap.campoBuscar().sendKeys(nomeProduto);
 			homepageMap.btnBuscar().click();
 		}else {
@@ -40,8 +38,10 @@ public class HomePagePage extends BasePage{
 	   * @param nomeProduto
 	   *          nome do produto desejado
 	   * @author Lucas Abreu
+	 * @throws Exception 
 	   */
 	public void validaResultadoBusca(String nomeProduto) {
+		System.out.println("Validando o resultado da busca produto: "+nomeProduto+"");
 		Assert.assertEquals(homepageMap.validarResultadoBusca(nomeProduto).isDisplayed(), true);
 	}
 	
@@ -53,6 +53,7 @@ public class HomePagePage extends BasePage{
 	   * @author Lucas Abreu
 	   */
 	public String adicionarProdutoCarrinho(String nomeProduto) {
+		System.out.println("Adicionando o produto ao carrinho");
 		String getNomeProduto = homepageMap.selecionarProduto(nomeProduto).getText();
 		System.out.println(getNomeProduto);
 		homepageMap.selecionarProduto(nomeProduto).click();
@@ -70,6 +71,7 @@ public class HomePagePage extends BasePage{
 	   */
 	public void validarProdutoCarrinho(String nomeProduto) {
 		adicionarProdutoCarrinho(nomeProduto);
+		System.out.println("Validando o produto: "+nomeProduto+" no carrinho");
 		Assert.assertEquals(homepageMap.validarProdutoCarrinho(nomeProduto).isDisplayed(), true);
 	}
 	
@@ -79,6 +81,7 @@ public class HomePagePage extends BasePage{
 	   * @author Lucas Abreu
 	   */
 	public void validarExcluirProduto() {
+		System.out.println("Excluindo o produto do carrinho");
 		homepageMap.btnExcluirProduto().click();
 		Assert.assertEquals(homepageMap.validaCarrinhoVazio().isDisplayed(), true);
 	}
@@ -93,10 +96,13 @@ public class HomePagePage extends BasePage{
 	   * @author Lucas Abreu
 	   */
 	public void validarQuantidadeSelecionada(String nomeProduto, String numQuantidade){
+		System.out.println("Adicionando o produto: "+nomeProduto+" no carrinho");
 		homepageMap.selecionarProduto(nomeProduto).click();
 		homepageMap.btnQuantidade().selectByVisibleText("2");
+		System.out.println("Quantidade selecionada: "+numQuantidade+"");
 		homepageMap.btnAdicionarCarrinho().click();
 		homepageMap.btnCarrinho().click();
 		Assert.assertEquals(homepageMap.validaQuantidadeItens(numQuantidade).isDisplayed(), true);
+		System.out.println("Produto validade no carrinho");
 	}
 }
