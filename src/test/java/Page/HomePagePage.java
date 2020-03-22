@@ -40,9 +40,10 @@ public class HomePagePage extends BasePage{
 	   * @author Lucas Abreu
 	 * @throws Exception 
 	   */
-	public void validaResultadoBusca(String nomeProduto) {
+	public void validaResultadoBusca(String nomeProduto, String nomeCaso) throws Exception {
 		System.out.println("Validando o resultado da busca produto: "+nomeProduto+"");
 		Assert.assertEquals(homepageMap.validarResultadoBusca(nomeProduto).isDisplayed(), true);
+		takeSnapShot("validarResultadoBusca_"+nomeCaso+"");
 	}
 	
 	/**
@@ -68,22 +69,26 @@ public class HomePagePage extends BasePage{
 	   * @param nomeProduto
 	   *          nome do produto desejado
 	   * @author Lucas Abreu
+	 * @throws Exception 
 	   */
-	public void validarProdutoCarrinho(String nomeProduto) {
+	public void validarProdutoCarrinho(String nomeProduto) throws Exception {
 		adicionarProdutoCarrinho(nomeProduto);
 		System.out.println("Validando o produto: "+nomeProduto+" no carrinho");
 		Assert.assertEquals(homepageMap.validarProdutoCarrinho(nomeProduto).isDisplayed(), true);
+		takeSnapShot("validarProdutoCarrinho");
 	}
 	
 	/**
 	   * Valida se o produto foi excluirdo do carrinho
 	   * 
 	   * @author Lucas Abreu
+	 * @throws Exception 
 	   */
-	public void validarExcluirProduto() {
+	public void validarExcluirProduto() throws Exception {
 		System.out.println("Excluindo o produto do carrinho");
 		homepageMap.btnExcluirProduto().click();
 		Assert.assertEquals(homepageMap.validaCarrinhoVazio().isDisplayed(), true);
+		takeSnapShot("validaCarrinhoVazio");
 	}
 	
 	/**
@@ -94,8 +99,9 @@ public class HomePagePage extends BasePage{
 	   *@param numQuantidade
 	   *        quantidade do protudo desejada
 	   * @author Lucas Abreu
+	 * @throws Exception 
 	   */
-	public void validarQuantidadeSelecionada(String nomeProduto, String numQuantidade){
+	public void validarQuantidadeSelecionada(String nomeProduto, String numQuantidade) throws Exception{
 		System.out.println("Adicionando o produto: "+nomeProduto+" no carrinho");
 		homepageMap.selecionarProduto(nomeProduto).click();
 		homepageMap.btnQuantidade().selectByVisibleText("2");
@@ -103,6 +109,7 @@ public class HomePagePage extends BasePage{
 		homepageMap.btnAdicionarCarrinho().click();
 		homepageMap.btnCarrinho().click();
 		Assert.assertEquals(homepageMap.validaQuantidadeItens(numQuantidade).isDisplayed(), true);
+		takeSnapShot("validaQuantidade_"+numQuantidade+"_Itens");
 		System.out.println("Produto validade no carrinho");
 	}
 }

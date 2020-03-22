@@ -20,6 +20,7 @@ public class BasePage {
 	}
 	public void navegateTo(String url) {
 		driver.navigate().to(url);
+		driver.manage().window().maximize();
 	}
 	public WebDriver getDriver() {
 		return driver;
@@ -29,11 +30,12 @@ public class BasePage {
 	}
 	
 	public void takeSnapShot(String nomeDoArquivoImagem) throws Exception {
-
-		// Convert web driver object to TakeScreenshot
-		File  scrShot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-		// imageFileDir = System.getProperty("java.io.tmpdir"); 
-		String imageFileDir = System.getProperty("user.dir") + "/evidencias/"+nomeDoArquivoImagem+".png";
-		FileUtils.copyFile(scrShot, new File(imageFileDir, nomeDoArquivoImagem));
+		try{
+			File  scrShot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+			String imageFileDir = System.getProperty("user.dir") + "/evidencias/";
+			FileUtils.copyFile(scrShot, new File(imageFileDir, nomeDoArquivoImagem + ".png"));
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 }

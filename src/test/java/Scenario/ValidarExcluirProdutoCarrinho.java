@@ -19,10 +19,10 @@ public class ValidarExcluirProdutoCarrinho extends BasePage {
 	}
 	
 	@Test
-	public void validarProdutoCarrinho() {
+	public void validarExcluirProdutoCarrinho() throws Exception {
 		nomeProduto = "Mouse";
 		homePagePage.buscarProduto(nomeProduto);
-		homePagePage.validaResultadoBusca(nomeProduto);
+		homePagePage.validaResultadoBusca(nomeProduto,"validarExcluirProdutoCarrinho");
 		homePagePage.validarProdutoCarrinho(nomeProduto);
 		homePagePage.validarExcluirProduto();
 	}

@@ -20,11 +20,11 @@ public class ValidarQuantidadeProdutoCarrinho extends BasePage {
 	}
 	
 	@Test
-	public void validarProdutoCarrinho() {
+	public void validarQuantidadeProdutoCarrinho() throws Exception {
 		nomeProduto = "Mouse";
 		quantidadeProduto = "2";
 		homePagePage.buscarProduto(nomeProduto);
-		homePagePage.validaResultadoBusca(nomeProduto);
+		homePagePage.validaResultadoBusca(nomeProduto,"validarQuantidadeProdutoCarrinho");
 		homePagePage.validarQuantidadeSelecionada(nomeProduto, quantidadeProduto);
 	}
 	
