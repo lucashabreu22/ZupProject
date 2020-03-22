@@ -11,13 +11,10 @@ import util.BasePage;
 
 public class HomePagePage extends BasePage{
 	private HomePageMap homepageMap;
-	WebDriverWait wait;
-	
 
 	public HomePagePage(WebDriver driver) {
 		super(driver);
 		homepageMap = new HomePageMap(driver);
-		wait = new WebDriverWait(driver, 10);
 	}
 	
 	/**
